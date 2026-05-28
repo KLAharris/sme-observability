@@ -7,14 +7,14 @@ datasources:
     access: proxy
     url: http://prometheus:9090
     isDefault: true
-    orgId: 10
+    orgId: 1
 
   - name: Loki
     uid: loki-sme
     type: loki
     access: proxy
     url: http://loki:3100
-    orgId: 10
+    orgId: 1
     jsonData:
       derivedFields:
         - datasourceUid: tempo-sme
@@ -28,7 +28,7 @@ datasources:
     type: tempo
     access: proxy
     url: http://tempo:3200
-    orgId: 10
+    orgId: 1
     jsonData:
       tracesToLogsV2:
         datasourceUid: loki-sme
