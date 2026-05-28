@@ -10,11 +10,19 @@ echo "=================================================="
 cd "$REPO_DIR"
 
 echo ""
-echo "[1/2] Starting all services..."
+echo "[1/2] Setting data directory permissions..."
+sudo mkdir -p /data/prometheus /data/loki /data/tempo /data/grafana
+sudo chown -R 65534:65534 /data/prometheus
+sudo chown -R 10001:10001 /data/loki
+sudo chown -R 10001:10001 /data/tempo
+sudo chown -R 472:472 /data/grafana
+
+echo ""
+echo "[2/2] Starting all services..."
 docker compose up -d
 
 echo ""
-echo "[2/2] Verifying containers..."
+echo "[3/3] Verifying containers..."
 sleep 5
 docker compose ps
 
