@@ -1,11 +1,29 @@
 apiVersion: 1
 
 providers:
-  - name: 'default'
-    orgId: 1
-    folder: ''
+  - name: 'SRE'
+    orgId: 10
+    folder: 'SRE'
     type: file
     disableDeletion: false
     updateIntervalSeconds: 10
     options:
-      path: /var/lib/grafana/dashboards
+      path: /etc/grafana/dashboards/sre
+
+  - name: 'DORA Monitoring'
+    orgId: 10
+    folder: 'DORA Monitoring'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      path: /etc/grafana/dashboards/doramonitoring
+
+  - name: 'DOI Cost Map'
+    orgId: 10
+    folder: 'DOI Cost Map'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      path: /etc/grafana/dashboards/doitcostmap

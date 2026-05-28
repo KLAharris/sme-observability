@@ -2,17 +2,38 @@ apiVersion: 1
 
 datasources:
   - name: Prometheus
+    uid: prometheus-sme
     type: prometheus
     access: proxy
-    url: http://prometheus:9090
+    url: http://localhost:9090
     isDefault: true
+    orgId: 10
 
   - name: Loki
+    uid: loki-sme
     type: loki
     access: proxy
-    url: http://loki:3100
+    url: http://localhost:3100
+    orgId: 10
+    jsonData:
+      derivedFields:
+        - datasourceUid: tempo-sme
+          matcherRegex: "traceID=(\\w+)"
+          name: TraceID
+          url: "$${__value.raw}"
+          urlDisplayLabel: View in Tempo
 
   - name: Tempo
+    uid: tempo-sme
     type: tempo
     access: proxy
-    url: http://tempo:3200
+    url: http://localhost:3200
+    orgId: 10
+    jsonData:
+      tracesToLogsV2:
+        datasourceUid: loki-sme
+        filterByTraceID: true
+        filterBySpanID: false
+        tags:
+          - key: project
+            value: project
