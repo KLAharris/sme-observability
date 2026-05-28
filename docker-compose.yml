@@ -64,7 +64,7 @@ services:
       - /var/log/journal:/var/log/journal:ro
       - /etc/machine-id:/etc/machine-id:ro
     group_add:
-      - systemd-journal
+      - "999"
     environment:
       - PROJECT_NAME=sre
     command: run --server.http.listen-addr=0.0.0.0:12345 /etc/alloy/config.alloy
