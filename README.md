@@ -6,28 +6,31 @@ Observability stack for SME platform — Prometheus, Loki, Tempo, Grafana.
 - **Prometheus** — metrics collection (port 9090)
 - **Loki** — log aggregation (port 3100)
 - **Tempo** — distributed tracing (port 3200)
-- **Grafana** — dashboards & visualization (port 3000)
+- **Grafana** — dashboards & visualization (managed separately)
 
 ## Setup
 
 ### 1. Clone the repo
+```bash
 git clone https://github.com/KLAharris/sme-observability
 cd sme-observability
+```
 
-### 2. Start the stack
-docker compose up -d
+### 2. Deploy the stack
+```bash
+bash scripts/deploy.sh
+```
 
 ### 3. Access
-- Grafana: http://18.143.253.170:3000
-- Prometheus: http://18.143.253.170:9090
-- Loki: http://18.143.253.170:3100
-- Tempo: http://18.143.253.170:3200
+- Grafana: https://grafana.devops-platform.ibotnoi.com
+- Prometheus: http://18.143.253.170:9090 (VPC only)
+- Loki: http://18.143.253.170:3100 (VPC only)
+- Tempo: http://18.143.253.170:3200 (VPC only)
 
 ## Structure
-- prometheus/ — Prometheus config & alert rules
-- loki/ — Loki config
-- tempo/ — Tempo config
-- grafana/ — Grafana provisioning (dashboards & datasources)
+- `prometheus/` — Prometheus config & alert rules
+- `loki/` — Loki config
+- `tempo/` — Tempo config
+- `grafana/` — Grafana provisioning (datasources & dashboards)
+- `scripts/` — deploy script
 
-## Maintainer
-Kla — DevOps Trainee @ Botnoi# sme-observability
