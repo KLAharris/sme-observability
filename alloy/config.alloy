@@ -1,0 +1,40 @@
+// ─────────────────────────────────────────
+// METRICS
+// ─────────────────────────────────────────
+
+prometheus.exporter.unix "node" {}
+
+prometheus.scrape "node" {
+  targets         = prometheus.exporter.unix.node.targets
+  forward_to      = [prometheus.remote_write.default.receiver]
+  scrape_interval = "15s"
+}
+
+prometheus.remote_write "default" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
+
+  external_labels = {
+    project = env("PROJECT_NAME"),
+  }
+}
+
+// ─────────────────────────────────────────
+// LOGS
+// ─────────────────────────────────────────
+
+loki.source.journal "system" {
+  forward_to = [loki.write.default.receiver]
+
+  labels = {
+    project = env("PROJECT_NAME"),
+    job     = "systemd-journal",
+  }
+}
+
+loki.write "default" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
