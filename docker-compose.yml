@@ -63,7 +63,7 @@ services:
           memory: 256m
 
   tempo:
-    image: grafana/tempo:v3.0.0
+    image: grafana/tempo:r255-830657f
     container_name: tempo
     ports:
       - "3200:3200"
